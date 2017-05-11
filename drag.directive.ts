@@ -6,7 +6,8 @@ import { DragNDropService } from "./dragndrop.service";
 })
 export class DragDirective implements OnInit {
 
-    @Input('draggableItem') data: any;
+    @Input('draggableItem') model: any;
+    @Input('target') target: string;
 
     constructor(private el: ElementRef, private dragDropService: DragNDropService) {
     }
@@ -26,8 +27,8 @@ export class DragDirective implements OnInit {
 
             el.classList.add('drag-src');
             e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData('text', JSON.stringify(this.data));
-            this.dragDropService.startDrag(el, this.data);
+            e.dataTransfer.setData('text', this.target);
+            this.dragDropService.startDrag(el, this.model);
         });
 
         // Remove the drag-src class

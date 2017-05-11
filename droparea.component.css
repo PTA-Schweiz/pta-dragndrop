@@ -1,0 +1,35 @@
+.dropzone {
+    min-height: 50px;
+    border: 2px dashed #c0c0c0;
+}
+
+.dropzone .dropzone-info {
+    font-family: "HelveticaNeue-Bold";
+    text-align: center;
+    color: #b7b7b7;
+    line-height: 50px;
+}
+
+.dragndrop-item-text {
+    margin: 10px 5px;
+}
+
+.dropzone ul {
+    padding: 5px;
+    margin: 0;
+}
+
+.dropzone.over {
+    border-color: #a94442;
+}
+
+.dragndrop-dropped-item {
+    list-style: none;
+    width: 100%;
+    border: 1px solid #666;
+    margin-bottom: 10px;
+}
+
+li.dropzone-dropped-item:last-of-type {
+    margin-bottom: 0;
+}

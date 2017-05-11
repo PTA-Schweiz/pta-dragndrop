@@ -15,4 +15,8 @@ export class DragNDropService {
         console.debug(model);
     }
 
+    endDrag() {
+        this.dragItem = null;
+        this.dragModel = null;
+    }
 }
