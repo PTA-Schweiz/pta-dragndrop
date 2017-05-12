@@ -1,4 +1,5 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {DragData} from "./dragdata";
 
 @Component({
     selector: 'droparea',
@@ -9,18 +10,26 @@ export class DropareaComponent {
 
     @Input() infotext: string;
     @Input() iconClassByType: Function;
+    @Input() dropTarget: string;
 
-    displayItems: any[] = [];
+    @Output() itemsChanged: EventEmitter<DragData[]> = new EventEmitter<DragData[]>();
+
+    displayItems: DragData[] = [];
 
     constructor() {}
 
+    clear() {
+        this.displayItems.length = 0;
+    }
 
     onDrop(event) {
-        this.displayItems.push(event.model);
+        this.displayItems.push(event);
+        this.itemsChanged.emit(this.displayItems);
     }
 
     remove(element) {
         this.displayItems.splice(this.displayItems.indexOf(element), 1);
+        this.itemsChanged.emit(this.displayItems);
     }
 
 }

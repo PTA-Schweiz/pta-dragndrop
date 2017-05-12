@@ -1,4 +1,4 @@
-<div class="dropzone" dropzone (dropped)="onDrop($event)">
+<div class="dropzone" [dropzone]="dropTarget" (dropped)="onDrop($event)">
     <p class="dropzone-info" *ngIf="displayItems.length == 0">{{ infotext }}</p>
     <ul>
         <li class="dragndrop-dropped-item" *ngFor="let el of displayItems">

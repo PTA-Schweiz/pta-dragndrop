@@ -1,22 +1,20 @@
-import {Injectable, ElementRef} from "@angular/core";
+import { Injectable } from "@angular/core";
+import { DragData, DragDataType } from "./dragdata";
 
 @Injectable()
 export class DragNDropService {
-    dragTargets: any[];
 
-    dragItem: any;
-    dragModel: any;
+    dragData: DragData;
 
-    startDrag(el: ElementRef, model?: any) {
-        this.dragItem = el;
-        this.dragModel = model;
+    isDragging: boolean;
 
-        console.debug('Start dragging');
-        console.debug(model);
+    startDrag(model: any, targets: string[], displayName: string, type: DragDataType, source: any) {
+        this.dragData = new DragData(model, targets, displayName, type, source);
+        this.isDragging = true;
     }
 
     endDrag() {
-        this.dragItem = null;
-        this.dragModel = null;
+        this.isDragging = false;
+        this.dragData = null;
     }
 }

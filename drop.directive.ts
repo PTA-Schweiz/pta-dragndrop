@@ -2,6 +2,7 @@ import {
     Directive, ElementRef, Input, OnInit, Output, EventEmitter
 } from '@angular/core';
 import { DragNDropService } from "./dragndrop.service";
+import {DragData, DragDataType} from "./dragdata";
 
 @Directive({
     selector: '[dropzone]',
@@ -9,8 +10,9 @@ import { DragNDropService } from "./dragndrop.service";
 export class DropDirective implements OnInit {
 
     @Input('dropzone') name: string;
+    @Input('dropOptions') dropOptions: { allowFiles?: boolean, allowMultiple?: boolean } = {};
 
-    @Output() dropped: EventEmitter<any> = new EventEmitter();
+    @Output() dropped: EventEmitter<DragData> = new EventEmitter();
 
     constructor(private el: ElementRef, private dragDropService: DragNDropService) {}
 
@@ -19,7 +21,7 @@ export class DropDirective implements OnInit {
 
         // Add a style to indicate that this element is a drop target
         el.addEventListener('dragenter', (e) => {
-            if(!this.isItemDroppable()) return;
+            if(!this.isItemDroppable(e)) return;
             el.classList.add('over');
             console.log(e)
         });
@@ -30,7 +32,7 @@ export class DropDirective implements OnInit {
         });
 
         el.addEventListener('dragover', (e) => {
-            if(!this.isItemDroppable()) return;
+            if(!this.isItemDroppable(e)) return;
             if (e.preventDefault) {
                 e.preventDefault();
             }
@@ -43,21 +45,44 @@ export class DropDirective implements OnInit {
         // On drop, get the data and convert it back to a JSON object
         // and fire off an event passing the data
         el.addEventListener('drop', (e) => {
-            if(!this.isItemDroppable()) return;
+            if(!this.isItemDroppable(e)) return;
             if (e.stopPropagation) {
                 e.stopPropagation(); // Stops some browsers from redirecting.
             }
 
             el.classList.remove('over');
-            let droplet = { model: this.dragDropService.dragModel, el: this.dragDropService.dragItem};
-            this.dropped.emit(droplet);
+            if(this.isFile(e)) {
+                this.handleFileDrop(e);
+            } else {
+                this.dropped.emit(this.dragDropService.dragData);
+            }
             this.dragDropService.endDrag();
             return false;
         })
     }
 
-    isItemDroppable(): boolean {
-        return this.dragDropService.dragItem != null;
+    isFile(e): boolean {
+        return e.dataTransfer.files.length != 0
     }
 
+    isItemDroppable(e): boolean {
+        if(this.dropOptions.allowFiles == true && this.isFile(e)) {
+            return true
+        } else {
+            return this.dragDropService.dragData != null && this.dragDropService.dragData.targets.indexOf(this.name) >= 0;
+        }
+    }
+
+    private handleFileDrop(e: DragEvent) {
+        if(this.dropOptions.allowMultiple) {
+            for(let i = 0; i < e.dataTransfer.files.length; i++) {
+                let file = e.dataTransfer.files.item(i);
+                this.dropped.emit(new DragData(file, [], file.name, DragDataType.FILE));
+            }
+        } else {
+            // only one file allowed
+            let file = e.dataTransfer.files.item(0);
+            this.dropped.emit(new DragData(file, [], file.name, DragDataType.FILE));
+        }
+    }
 }
