@@ -27,13 +27,21 @@ export class DragDirective implements OnInit {
             el.classList.add('drag-src');
             e.dataTransfer.effectAllowed = 'move';
             e.dataTransfer.setData(el, this.dragName, '');
+
+            // let clone = e.target.cloneNode(true);
+            // e.target.parentNode.appendChild(clone);
+            // e.target.ghostDragger = clone;
+
             this.dragDropService.startDrag(this.dragModel, this.dragTargets, this.dragName, this.dragType, el);
+            return true;
         });
 
         // Remove the drag-src class
         el.addEventListener('dragend', (e) => {
             e.preventDefault();
             el.classList.remove('drag-src');
+            // let clone = e.target.ghostDragger;
+            // clone.parentNode.removeChild(clone);
             this.dragDropService.endDrag();
         });
     }
