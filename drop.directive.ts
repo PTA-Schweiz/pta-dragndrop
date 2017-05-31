@@ -49,6 +49,9 @@ export class DropDirective implements OnInit {
             if (e.stopPropagation) {
                 e.stopPropagation(); // Stops some browsers from redirecting.
             }
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
 
             el.classList.remove('over');
             if(this.isFile(e)) {
