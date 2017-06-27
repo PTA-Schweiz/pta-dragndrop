@@ -5,6 +5,6 @@
   "author": "stefan.staub@pta.ch",
   "dependencies": {
     "@angular/core": "^4.2.4"
-  }
+  },
   "main": "pta-dragndrop.ts"
 }
