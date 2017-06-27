@@ -2,5 +2,9 @@
   "name": "pta-dragndrop",
   "version": "1.0.0",
   "description": "Drag and Drop Component",
-  "author": "stefan.staub@pta.ch"
+  "author": "stefan.staub@pta.ch",
+  "dependencies": {
+    "@angular/core": "^4.2.4"
+  }
+  "main": "pta-dragndrop.ts"
 }
