@@ -23,7 +23,7 @@ export class DragDirective implements OnInit {
         el.draggable = 'true';
 
         // Set up the dragstart event and add the drag-src CSS class
-        el.addEventListener('dragstart', (e) => {
+        el.addEventListener('dragstart', (e: any) => {
             el.classList.add('drag-src');
             e.dataTransfer.effectAllowed = 'move';
             e.dataTransfer.setData(el, this.dragName, '');
@@ -37,7 +37,7 @@ export class DragDirective implements OnInit {
         });
 
         // Remove the drag-src class
-        el.addEventListener('dragend', (e) => {
+        el.addEventListener('dragend', (e: any) => {
             e.preventDefault();
             el.classList.remove('drag-src');
             // let clone = e.target.ghostDragger;

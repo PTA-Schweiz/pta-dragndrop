@@ -67,12 +67,12 @@ export class DropareaComponent {
         this.displayItems.length = 0;
     }
 
-    onDrop(event) {
+    onDrop(event: any) {
         this.displayItems.push(event);
         this.itemsChanged.emit(this.displayItems);
     }
 
-    remove(element) {
+    remove(element: any) {
         this.displayItems.splice(this.displayItems.indexOf(element), 1);
         this.itemsChanged.emit(this.displayItems);
     }

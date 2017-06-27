@@ -20,7 +20,7 @@ export class DropDirective implements OnInit {
         let el = this.el.nativeElement;
 
         // Add a style to indicate that this element is a drop target
-        el.addEventListener('dragenter', (e) => {
+        el.addEventListener('dragenter', (e: any) => {
             if(!this.isItemDroppable(e)) return;
             el.classList.add('over');
             console.log(e)
@@ -31,7 +31,7 @@ export class DropDirective implements OnInit {
             el.classList.remove('over');
         });
 
-        el.addEventListener('dragover', (e) => {
+        el.addEventListener('dragover', (e: any) => {
             if(!this.isItemDroppable(e)) return;
             if (e.preventDefault) {
                 e.preventDefault();
@@ -44,7 +44,7 @@ export class DropDirective implements OnInit {
 
         // On drop, get the data and convert it back to a JSON object
         // and fire off an event passing the data
-        el.addEventListener('drop', (e) => {
+        el.addEventListener('drop', (e: any) => {
             if(!this.isItemDroppable(e)) return;
             if (e.stopPropagation) {
                 e.stopPropagation(); // Stops some browsers from redirecting.
@@ -64,11 +64,11 @@ export class DropDirective implements OnInit {
         })
     }
 
-    isFile(e): boolean {
+    isFile(e: any): boolean {
         return e.dataTransfer.files.length != 0
     }
 
-    isItemDroppable(e): boolean {
+    isItemDroppable(e: any): boolean {
         if(this.dropOptions.allowFiles == true && this.isFile(e)) {
             return true
         } else {
