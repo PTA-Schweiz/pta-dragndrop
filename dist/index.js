@@ -4,6 +4,7 @@ var drag_directive_1 = require("./drag.directive");
 exports.DragDirective = drag_directive_1.DragDirective;
 var dragdata_1 = require("./dragdata");
 exports.DragData = dragdata_1.DragData;
+exports.DragDataType = dragdata_1.DragDataType;
 var dragndrop_service_1 = require("./dragndrop.service");
 exports.DragNDropService = dragndrop_service_1.DragNDropService;
 var drop_directive_1 = require("./drop.directive");
