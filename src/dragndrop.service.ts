@@ -8,8 +8,8 @@ export class DragNDropService {
 
     isDragging: boolean;
 
-    startDrag(model: any, targets: string[], displayName: string, type: DragDataType, source: any) {
-        this.dragData = new DragData(model, targets, displayName, type, source);
+    startDrag(model: any, targets: string[], displayName: string, type: DragDataType, source: any, previewSrc: string) {
+        this.dragData = new DragData(model, targets, displayName, type, source, previewSrc);
         this.isDragging = true;
     }
 

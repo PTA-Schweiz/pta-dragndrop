@@ -11,6 +11,7 @@ export class DragDirective implements OnInit {
     @Input('dragTargets') dragTargets: string[];
     @Input('dragName') dragName: string;
     @Input('dragType') dragType: DragDataType;
+    @Input('previewSrc') previewSrc: string;
 
     constructor(private el: ElementRef, private dragDropService: DragNDropService) {
     }
@@ -32,7 +33,7 @@ export class DragDirective implements OnInit {
             // e.target.parentNode.appendChild(clone);
             // e.target.ghostDragger = clone;
 
-            this.dragDropService.startDrag(this.dragModel, this.dragTargets, this.dragName, this.dragType, el);
+            this.dragDropService.startDrag(this.dragModel, this.dragTargets, this.dragName, this.dragType, el, this.previewSrc);
             return true;
         });
 

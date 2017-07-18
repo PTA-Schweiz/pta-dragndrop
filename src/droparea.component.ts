@@ -45,7 +45,7 @@ li.dropzone-dropped-item:last-of-type {
     <p class="dropzone-info" *ngIf="displayItems.length == 0">{{ infotext }}</p>
     <ul>
         <li class="dragndrop-dropped-item" *ngFor="let el of displayItems">
-            <p class="dragndrop-item-text"><i class="icon" [ngClass]="iconClassByType(el.type)"></i> {{ el.displayName }} <i (click)="remove(el)" class="pull-right icon icon-bin"></i></p>
+            <p class="dragndrop-item-text"><img *ngIf="el.previewSrc" src="{{ el.previewSrc }}" height="50"> <i *ngIf="!el.previewSrc" class="icon" [ngClass]="iconClassByType(el.type)"></i> {{ el.displayName }} <i (click)="remove(el)" class="pull-right icon icon-bin"></i></p>
         </li>
     </ul>
 </div>

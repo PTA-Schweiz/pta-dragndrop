@@ -27,8 +27,11 @@
     "typescript": "2.3.3",
     "zone.js": "0.8.11"
   },
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "prepublish": "tsc"
+    "transpile": "ngc",
+    "build": "npm run transpile"
   }
 }
