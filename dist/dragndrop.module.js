@@ -13,6 +13,7 @@ var DragNDropModule = (function () {
 DragNDropModule.decorators = [
     { type: core_1.NgModule, args: [{
                 imports: [common_1.CommonModule],
+                declarations: [drag_directive_1.DragDirective, drop_directive_1.DropDirective],
                 exports: [drag_directive_1.DragDirective, drop_directive_1.DropDirective, droparea_component_1.DropareaComponent]
             },] },
 ];

@@ -6,6 +6,7 @@ import { DropareaComponent } from "./droparea.component";
 
 @NgModule({
     imports: [CommonModule],
+    declarations: [DragDirective, DropDirective],
     exports: [DragDirective, DropDirective, DropareaComponent]
 })
 export class DragNDropModule {}
